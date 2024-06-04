@@ -1,0 +1,259 @@
+openapi: 3.1.0
+x-stoplight:
+  id: vpqlyp3d2i41u
+info:
+  title: todo
+  version: '1.0'
+  summary: open-apiを使ったスキーマ駆動開発の説明用サンプル
+  description: ''
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /todos:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          $ref: '#/components/responses/GetTodos'
+      operationId: get-todos
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: order_by
+        - schema:
+            type: string
+          in: query
+          name: filter
+        - schema:
+            type: string
+          in: query
+          name: page
+      requestBody:
+        content: {}
+    post:
+      summary: ''
+      operationId: post-todos
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/PostTodos'
+        description: ''
+      parameters: []
+  '/todos/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          $ref: '#/components/responses/GetTodo'
+      operationId: get-todos-id
+      requestBody:
+        content: {}
+    patch:
+      summary: ''
+      operationId: patch-todos-id
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/PatchTodo'
+    delete:
+      summary: ''
+      operationId: delete-todos-id
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    Todo:
+      title: Todo
+      x-stoplight:
+        id: 0pczxmc0xrfng
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+          x-stoplight:
+            id: ziqcsuro24kc3
+        description:
+          type: string
+          x-stoplight:
+            id: 3vng5c8an39nz
+        status:
+          $ref: '#/components/schemas/Status'
+          x-stoplight:
+            id: gxwvyoti3r4fs
+        due:
+          type: string
+          x-stoplight:
+            id: m7e0nd7wpqjuj
+          format: date
+        created_by:
+          $ref: '#/components/schemas/User'
+          x-stoplight:
+            id: u19ow2ea14jsu
+        created_at:
+          type: string
+          x-stoplight:
+            id: m99mmhpdsubee
+          format: date-time
+        updated_by:
+          type: string
+          x-stoplight:
+            id: 05cvmazs0u3k9
+          format: date-time
+    TodoListItem:
+      title: TodoListItem
+      x-stoplight:
+        id: 9jhfoccr0to00
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+          x-stoplight:
+            id: c0zhh4bl6j41r
+        status:
+          $ref: '#/components/schemas/Status'
+          x-stoplight:
+            id: ydwa0jnr5rq5y
+        updated_at:
+          type: string
+          x-stoplight:
+            id: 3kfne796xmyna
+          format: date-time
+    User:
+      title: User
+      x-stoplight:
+        id: k8hb0w37xphp0
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          x-stoplight:
+            id: 3wm7no73y4w5n
+          format: email
+        nickname:
+          type: string
+          x-stoplight:
+            id: 4gwfm729k2td0
+        birthdate:
+          type: string
+          x-stoplight:
+            id: od0quq0rt7k14
+          format: date
+        created_at:
+          type: string
+          x-stoplight:
+            id: a60602hwmlk8s
+          format: date-time
+      required:
+        - id
+        - email
+        - created_at
+    Status:
+      title: Status
+      x-stoplight:
+        id: 6l4fm15nmvdtk
+      type: string
+      enum:
+        - in_progress
+        - todo
+        - completed
+  requestBodies:
+    PostTodos:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                x-stoplight:
+                  id: aaoazzk8wkmge
+              description:
+                type: string
+                x-stoplight:
+                  id: uej0j1dnj1lgg
+              status:
+                $ref: '#/components/schemas/Status'
+                x-stoplight:
+                  id: 4igrqv6w88cqh
+              due:
+                type: string
+                x-stoplight:
+                  id: plgfc80yqtz9f
+                format: date
+            required:
+              - title
+              - description
+              - status
+    PatchTodo:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                x-stoplight:
+                  id: i5qnfinz9yddy
+              descripttion:
+                type: string
+                x-stoplight:
+                  id: kxfh493q7lgx5
+              status:
+                $ref: '#/components/schemas/Status'
+                x-stoplight:
+                  id: y3h5yebrp30d1
+              due:
+                type: string
+                x-stoplight:
+                  id: 7qoipsz2lq2v4
+                format: date
+            required:
+              - title
+              - descripttion
+              - status
+  responses:
+    GetTodos:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TodoListItem'
+    GetTodo:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Todo'
