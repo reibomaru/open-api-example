@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "gen:client": "openapi-generator-cli generate -g typescript-axios -i ./reference/todo.yaml -o ./client/src/generated -c ./reference/client-config.json"
+    "gen:client": "openapi-generator-cli generate -g typescript-axios -i ./reference/todo.yaml -o ./client/src/generated -c ./reference/client-config.json",
+    "gen:server": "openapi-generator-cli generate -g typescript-nestjs -i ./reference/todo.yaml -o ./server/src/generated -c ./reference/server-config.json"
   },
   "author": "",
   "license": "ISC",
